@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>task3</title>
+  </head>
+  <body>
+    <input type="number" id="x0" value="1" />
+    <input type="number" id="y0" value="1" />
+    <input type="number" id="z0" value="1" />
+    <br />
+    <br />
+    <input type="number" id="x1" value="2" />
+    <input type="number" id="y1" value="2" />
+    <input type="number" id="z1" value="2" />
+    <br />
+    <br />
+    <input type="number" id="x2" value="3" />
+    <input type="number" id="y2" value="3" />
+    <input type="number" id="z2" value="3" />
+    <br />
+    <br />
+
+    <input type="button" value="calc area" onclick="calcArea()" />
+    <p id="result"></p>
+
+    <script src="task1.js"></script>
+
+    <script>
+      function distance(v0, v1) {
+        return Math.sqrt(
+          (v0.x - v1.x) ** 2 + (v0.y - v1.y) ** 2 + (v0.z - v1.z) ** 2
+        );
+      }
+
+      function calcAreaOfTriangle(v0, v1, v2) {
+        const a = distance(v0, v1);
+        const b = distance(v1, v2);
+        const c = distance(v0, v2);
+        s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+      }
+
+      function calcArea() {
+        const x0 = Number(document.getElementById("x0").value);
+        console.log(typeof x0);
+        const y0 = Number(document.getElementById("y0").value);
+        const z0 = Number(document.getElementById("z0").value);
+        const x1 = Number(document.getElementById("x1").value);
+        const y1 = Number(document.getElementById("y1").value);
+        const z1 = Number(document.getElementById("z1").value);
+        const x2 = Number(document.getElementById("x2").value);
+        const y2 = Number(document.getElementById("y2").value);
+        const z2 = Number(document.getElementById("z2").value);
+
+        const v0 = new Vec3(x0, y0, z0);
+        const v1 = new Vec3(x1, y1, z1);
+        const v2 = new Vec3(x2, y2, z2);
+
+        const area = calcAreaOfTriangle(v0, v1, v2);
+        document.getElementById("result").textContent = area;
+      }
+    </script>
+  </body>
+</html>
