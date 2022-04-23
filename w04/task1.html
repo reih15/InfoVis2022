@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>task1</title>
+  </head>
+  <body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+      const svg = d3.select("body").append("svg");
+      d3.csv(
+        "https://vizlab-kobe-lecture.github.io/InfoVis2021/W04/data.csv",
+        (data) => {
+          svg
+            .selectAll("circle")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", (d) => d.x)
+            .attr("cy", (d) => d.y)
+            .attr("r", (d) => d.r);
+        }
+      );
+    </script>
+  </body>
+</html>
