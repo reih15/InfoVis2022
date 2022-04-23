@@ -1,21 +1,37 @@
 <html>
   <head>
-    <title>task1</title>
+    <title>task2</title>
   </head>
   <body>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script>
+      const margin = 15;
+      const height = 20;
+
       const svg = d3.select("body").append("svg");
       d3.csv("https://reih15.github.io/InfoVis2022/w04/task2.csv", (data) => {
         svg
-          .selectAll("circle")
+          .selectAll("rect")
           .data(data)
           .enter()
-          .append("circle")
-          .attr("cx", (d) => d.x)
-          .attr("cy", (d) => d.y)
-          .attr("r", (d) => d.r)
-          .attr("fill", (d) => d.c);
+          .append("rect")
+          .attr("x", margin)
+          .attr("y", (d, i) => margin + i * (margin + height))
+          .attr("width", (d) => d.value)
+          .attr("height", height)
+          .attr("fill", (d) => d.color);
+      });
+
+      d3.csv("https://reih15.github.io/InfoVis2022/w04/task2.csv", (data) => {
+        svg
+          .selectAll("text")
+          .data(data)
+          .enter()
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("x", margin / 2)
+          .attr("y", (d, i) => margin + height / 2 + 5 + i * (margin + height))
+          .text((d) => d.label);
       });
     </script>
   </body>
